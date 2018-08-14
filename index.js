@@ -33,8 +33,24 @@ const lowercaseRule = (object) => {
   }
 }
 
-const lowercaseNames = (data) => data.map(object => copy(object, lowercaseRule))
+const uppercaseRule = (object) => {
+  return {
+    ...object,
+    text: object.text.toUpperCase()
+  }
+}
 
-let processedData = processPipeline(DATA, [lowercaseNames])
+const addOneRule = (object) => {
+  return {
+    ...object,
+    id: String(parseInt(object.id) + 1)
+  }
+}
+
+const lowercaseNames = (data) => data.map(object => copy(object, lowercaseRule))
+const uppercaseText  = (data) => data.map(object => copy(object, uppercaseRule))
+const addOneToIds    = (data) => data.map(object => copy(object, addOneRule))
+
+let processedData = processPipeline(DATA, [lowercaseNames, uppercaseText, addOneToIds])
 console.log(processedData)
 console.log(DATA)
