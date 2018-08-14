@@ -51,6 +51,11 @@ const lowercaseNames = (data) => data.map(object => copy(object, lowercaseRule))
 const uppercaseText  = (data) => data.map(object => copy(object, uppercaseRule))
 const addOneToIds    = (data) => data.map(object => copy(object, addOneRule))
 
-let processedData = processPipeline(DATA, [lowercaseNames, uppercaseText, addOneToIds])
+const notifyFakeDevs = (data) => {
+  console.log("Now processing batch 1 of 14...")
+  return data
+}
+
+let processedData = processPipeline(DATA, [lowercaseNames, uppercaseText, addOneToIds, notifyFakeDevs])
 console.log(processedData)
 console.log(DATA)
